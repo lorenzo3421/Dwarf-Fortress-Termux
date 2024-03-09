@@ -12,6 +12,12 @@ pkg update && pkg install wget
 curl -sSL https://raw.githubusercontent.com/lorenzo3421/Dwarf-Fortress-Termux/main/df-termux.sh | bash
 ```
 
+After installation, you can run Dwarf Fortress by using the following command:
+```bash
+./df
+```
+You can pinch to zoom in and out in Termux, that will be very useful!
+
 ## Credits
 
 [AllPlatform's Termux-UbuntuX86_64](https://github.com/AllPlatform/Termux-UbuntuX86_64)
