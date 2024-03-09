@@ -2,7 +2,7 @@
 
 A bash script that installs the ASCII Dwarf Fortress on Android devices using Termux!
 
-Check out some screenshots [here](.github/screenshots)!
+![Screenshots](./screenshots.jpg)
 
 ## Installation
 
