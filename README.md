@@ -2,6 +2,8 @@
 
 A bash script that installs the ASCII Dwarf Fortress on Android devices using Termux!
 
+Check out some screenshots [here](.github/screenshots)!
+
 ## Installation
 
 Commands are separated as I was not able to make them run together, for some reason the -y flag doesn't actually say yes to everything in pkg update.
@@ -21,6 +23,13 @@ You can pinch to zoom in and out in Termux, that will be very useful!
 ## Credits
 
 [AllPlatform's Termux-UbuntuX86_64](https://github.com/AllPlatform/Termux-UbuntuX86_64)
+
+## Contributing
+
+Contributions are always welcome!
+
+Please adhere to this project's
+[Code of Conduct](.github/CODE_OF_CONDUCT.md).
 
 ## License
 
