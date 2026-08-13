@@ -29,10 +29,15 @@ sed -i 's/\[PRINT_MODE:2D\]/\[PRINT_MODE:TEXT\]/' data/init/init.txt
 echo "Creating dependency installation script..."
 cat > ../df-deps.sh << 'EOF'
 #!/bin/bash
-set -e
-export DEBIAN_FRONTEND=noninteractive
+sed -i 's/main/main restricted universe multiverse/' /etc/apt/sources.list 2>/dev/null || true
+sed -i 's/Components: main/Components: main restricted universe multiverse/' /etc/apt/sources.list.d/ubuntu.sources 2>/dev/null || true
 apt update -y
-apt install -y libsdl1.2debian libsdl1.2-compat libsdl-image1.2 libsdl-ttf2.0-0 libgtk2.0-0 libopenal1 libsndfile1 libncursesw5 libncurses5 libglu1-mesa || apt install -y libsdl1.2debian libsdl-image1.2 libsdl-ttf2.0-0 libgtk2.0-0 libopenal1 libsndfile1 libncurses5 libglu1-mesa
+apt install --no-install-recommends -y libsdl1.2-compat libsdl-image1.2 libsdl-ttf2.0-0 libgtk2.0-0 libopenal1 libsndfile1 libncursesw6 libncurses6 libtinfo6 libglu1-mesa
+ln -s /usr/lib/x86_64-linux-gnu/libncursesw.so.6 /usr/lib/x86_64-linux-gnu/libncursesw.so.5 2>/dev/null || true
+ln -s /usr/lib/x86_64-linux-gnu/libncurses.so.6 /usr/lib/x86_64-linux-gnu/libncurses.so.5 2>/dev/null || true
+ln -s /usr/lib/x86_64-linux-gnu/libtinfo.so.6 /usr/lib/x86_64-linux-gnu/libtinfo.so.5 2>/dev/null || true
+apt clean
+rm -rf /var/lib/apt/lists/*
 chmod +x /root/df_linux/df
 chmod +x /root/df_linux/libs/Dwarf_Fortress
 rm -f /root/df-deps.sh
@@ -84,7 +89,7 @@ command+=" LANG=C.UTF-8"
 command+=" /bin/bash -c /root/df-deps.sh"
 
 if $command; then
-    printf "\n\033[1;32m[✓] Setup complete! You can now run Dwarf Fortress using './df'.\033[0m\n"
+    printf "\n\033[1;32mSetup complete! You can now run Dwarf Fortress using './df'.\033[0m\n"
 else
-    printf "\n\033[1;31m[✗] Setup failed during dependency installation. Please check the logs above.\033[0m\n"
+    printf "\n\033[1;31mSetup failed during dependency installation. Please check the logs above.\033[0m\n"
 fi
