@@ -29,14 +29,13 @@ sed -i 's/\[PRINT_MODE:2D\]/\[PRINT_MODE:TEXT\]/' data/init/init.txt
 echo "Creating dependency installation script..."
 cat > ../df-deps.sh << 'EOF'
 #!/bin/bash
+set -e
+export DEBIAN_FRONTEND=noninteractive
 apt update -y
-rm /var/lib/dpkg/info/$nomdupaquet* -f
-apt install -y libsdl1.2debian libsdl-image1.2 libsdl-ttf2.0-0 libgtk2.0-0 libopenal1 libsndfile1 libncursesw5 libglu1-mesa
+apt install -y libsdl1.2debian libsdl1.2-compat libsdl-image1.2 libsdl-ttf2.0-0 libgtk2.0-0 libopenal1 libsndfile1 libncursesw5 libncurses5 libglu1-mesa || apt install -y libsdl1.2debian libsdl-image1.2 libsdl-ttf2.0-0 libgtk2.0-0 libopenal1 libsndfile1 libncurses5 libglu1-mesa
 chmod +x /root/df_linux/df
 chmod +x /root/df_linux/libs/Dwarf_Fortress
-clear
-echo "Dwarf Fortress has been installed. To run it, use the command './df'."
-rm /root/df-deps.sh
+rm -f /root/df-deps.sh
 EOF
 chmod +x ../df-deps.sh
 
@@ -83,6 +82,9 @@ command+=" PATH=/usr/local/sbin:/usr/local/bin:/bin:/usr/bin:/sbin:/bin:/usr/sbi
 command+=" TERM=$TERM"
 command+=" LANG=C.UTF-8"
 command+=" /bin/bash -c /root/df-deps.sh"
-$command
 
-echo "Setup complete. You can now run Dwarf Fortress using './df'."
+if $command; then
+    printf "\n\033[1;32m[✓] Setup complete! You can now run Dwarf Fortress using './df'.\033[0m\n"
+else
+    printf "\n\033[1;31m[✗] Setup failed during dependency installation. Please check the logs above.\033[0m\n"
+fi
