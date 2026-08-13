@@ -1,5 +1,6 @@
 #!/bin/bash
 
+BASE_DIR="$(pwd)"
 UBUNTU_SCRIPT_URL="https://raw.githubusercontent.com/AllPlatform/Termux-UbuntuX86_64/master/Ubuntu-AMD64.sh"
 DWARF_FORTRESS_URL="http://www.bay12games.com/dwarves/df_44_12_linux.tar.bz2"
 UBUNTU_ROOT="ubuntu-fs64/root"
@@ -41,7 +42,7 @@ chmod +x ../df-deps.sh
 
 # Create a script to run Dwarf Fortress from Termux
 echo "Creating run script for Termux..."
-cd ../..
+cd "$BASE_DIR"
 cat > df << 'EOF'
 #!/bin/bash
 cd "$(dirname "$0")"
@@ -66,7 +67,7 @@ chmod +x df
 
 # Run the dependency installation script
 echo "Running dependency installation script..."
-cd "$(dirname "$0")"
+cd "$BASE_DIR"
 unset LD_PRELOAD
 command="proot"
 command+=" --link2symlink"
