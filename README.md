@@ -4,6 +4,11 @@ A bash script that installs the ASCII Dwarf Fortress on Android devices using Te
 
 ![Screenshots](./screenshots.jpg)
 
+## Requirements
+
+- **[Termux from F-Droid](https://f-droid.org/packages/com.termux/)** (the Play Store version is deprecated and unsupported).
+- Around **800 MB** of free storage on the device.
+
 ## Installation
 
 Commands are separated as I was not able to make them run together, for some reason the -y flag doesn't actually say yes to everything in pkg update.
